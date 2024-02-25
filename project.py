@@ -5,23 +5,8 @@ import scipy.stats as stats
 from statsmodels.formula.api import ols
 import statsmodels.api as sm
 import plotly.express as px
-
-# Custom CSS styles
-custom_styles = """
-    <style>
-        body {
-            font-family: 'Anta', sans-serif;
-            background-color: #dcdcdc; /* Grey background */
-            color: navy; /* Navy blue font color */
-        }
-        .stSelectbox {
-            font-family: 'Anta', sans-serif;
-        }
-    </style>
-"""
-
-# Apply custom styles
-st.markdown(custom_styles, unsafe_allow_html=True)
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Function to load and cache the dataset
 @st.cache(allow_output_mutation=True)
@@ -29,31 +14,38 @@ def load_data(uploaded_file):
     if uploaded_file is not None:
         return pd.read_csv(uploaded_file)
 
+# Function to encode data
+def encode_data(data):
+    encoded_data = data.apply(lambda x: pd.factorize(x)[0] if x.dtype == "O" else x)
+    return encoded_data
+
 # Function to perform t-test and return results
 def perform_t_test(column1, column2):
     result = stats.ttest_ind(column1, column2, nan_policy='omit')
     return result
 
+# Function to check if the DataFrame is not None and not empty
+def is_valid_dataframe(df):
+    return df is not None and not df.empty
+
 # Main Streamlit app
 def main():
     st.title("Data Analysis App")
 
-    # Section Zero: Upload Data
-    st.header("Section Zero: Upload Data")
+    # Section Zero: Upload and Encode Data
+    st.header("Section Zero: Upload and Encode Data")
 
     uploaded_file = st.file_uploader("Upload your CSV or Excel file", type=["csv", "xlsx"])
     df = load_data(uploaded_file)
 
-    if df is not None:
-        st.subheader("Uploaded Data:")
-        st.write(df)
-
-    # Section One: Data Analysis
-    st.header("Section One: Data Analysis")
-
-    if df is not None and not df.empty:
+    if is_valid_dataframe(df):
         # Encode data if necessary
-        df_encoded = df.apply(lambda x: pd.factorize(x)[0] if x.dtype == "O" else x)
+        df_encoded = encode_data(df)
+        st.subheader("Encoded Data:")
+        st.write(df_encoded)
+
+        # Section One: Data Analysis
+        st.header("Section One: Data Analysis")
 
         st.subheader("Summary Statistics:")
         summary_stats = df_encoded.describe()
@@ -63,7 +55,7 @@ def main():
         pivot_option = st.checkbox("Enable Pivoting", value=False)
         if pivot_option:
             pivot_columns = st.multiselect("Select columns for pivoting", df.columns)
-            if pivot_columns:
+            if pivot_columns and is_valid_dataframe(df_encoded):
                 df_pivot = df_encoded.pivot_table(index=pivot_columns, aggfunc="mean")
                 st.write("Pivoted Data:")
                 st.write(df_pivot)
@@ -71,7 +63,7 @@ def main():
         # Box plot
         st.subheader("Box Plot:")
         selected_columns = st.multiselect("Select columns for box plot", df_encoded.columns)
-        if selected_columns:
+        if selected_columns and is_valid_dataframe(df_encoded):
             fig = px.box(df_encoded[selected_columns])
             st.plotly_chart(fig)
 
@@ -303,6 +295,18 @@ def main():
     if correlation_matrix_legend:
         st.subheader("Correlation Matrix Legend:")
         st.write("Legend values range from -1 (perfect negative correlation) to 1 (perfect positive correlation). 0 indicates no correlation.")
+    # Sub-section C: Generate Heatmap
+        st.subheader("Sub-section C: Generate Heatmap")
+
+        # Select columns for heatmap
+        selected_columns_heatmap = st.multiselect("Select columns for heatmap", df.columns) if is_valid_dataframe(df) else None
+
+        # Generate heatmap
+        if st.button("Generate Heatmap") and is_valid_dataframe(df) and selected_columns_heatmap is not None:
+            heatmap_data = df[selected_columns_heatmap].corr()
+            fig, ax = plt.subplots(figsize=(10, 8))
+            sns.heatmap(heatmap_data, annot=True, cmap="coolwarm", fmt=".2f", ax=ax)
+            st.pyplot(fig)
 
 if __name__ == "__main__":
     main()
