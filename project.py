@@ -33,6 +33,48 @@ def is_valid_dataframe(df):
 # Main Streamlit app
 def main():
     st.title("Data Analysis App")
+    
+    import streamlit as st
+
+    # Sidebar
+    st.sidebar.title("User Guide")
+
+    # Data Encoding
+    st.sidebar.markdown("### Data Encoding")
+    st.sidebar.write("Data encoding is performed to convert categorical variables into numerical representations. This is necessary for machine learning algorithms that require numerical inputs.")
+
+    # Summary Statistics
+    st.sidebar.markdown("### Summary Statistics")
+    st.sidebar.write("Summary statistics provide a concise overview of the dataset, including measures such as mean, median, standard deviation, etc. They help in understanding the central tendency and spread of the data.")
+
+    # Box Plot
+    st.sidebar.markdown("### Box Plot")
+    st.sidebar.write("Box plots visualize the distribution of numerical data and help identify outliers and variability in the dataset. They are useful for comparing multiple groups or variables.")
+
+    # ANOVA Test
+    st.sidebar.markdown("### ANOVA Test")
+    st.sidebar.write("ANOVA (Analysis of Variance) is used to compare means across multiple groups. It determines whether there are statistically significant differences between the means of three or more independent groups.")
+
+    # T-Test
+    st.sidebar.markdown("### T-Test")
+    st.sidebar.write("T-tests are used to compare means between two groups. They help determine whether the difference between the means of two samples is statistically significant, indicating whether there is a meaningful difference between the groups.")
+
+    # Regression Analysis
+    st.sidebar.markdown("### Regression Analysis")
+    st.sidebar.write("Regression analysis is used to model the relationship between one or more independent variables and a dependent variable. It helps understand how the independent variables impact the dependent variable and predict its values.")
+
+    # T-Test for Two Groups
+    st.sidebar.markdown("### T-Test for Two Groups")
+    st.sidebar.write("T-tests for two groups are used to compare means between two independent groups. They determine whether there is a statistically significant difference between the means of the two groups.")
+
+    # Data Visualization
+    st.sidebar.markdown("### Data Visualization")
+    st.sidebar.write("Data visualization techniques such as histograms, scatter plots, and box plots are used to visually explore the dataset and identify patterns, trends, and relationships between variables.")
+
+    # Correlation Matrix
+    st.sidebar.markdown("### Correlation Matrix")
+    st.sidebar.write("A correlation matrix displays the pairwise correlation coefficients between variables. It helps identify relationships between variables and assess the strength and direction of those relationships.")
+
 
     # Section Zero: Upload and Encode Data
     st.header("Section Zero: Upload and Encode Data")
