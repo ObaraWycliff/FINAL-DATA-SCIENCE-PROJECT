@@ -7,6 +7,8 @@ import statsmodels.api as sm
 import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
+import plotly.io as pio
+
 
 # Function to load and cache the dataset
 @st.cache(allow_output_mutation=True)
@@ -278,7 +280,6 @@ def main():
                 for column in selected_columns_visualization:
                     fig = px.violin(df, y=column, box=True, points="all", title=f'Violin Plot of {column}')
                     st.plotly_chart(fig)
-
             elif option == "Map Plot":
                 st.subheader("Map Plot:")
                 if "latitude" in df.columns and "longitude" in df.columns:
@@ -286,7 +287,7 @@ def main():
                     
                     # Allow users to customize map style
                     map_style = st.selectbox("Select Map Style", ["open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner", "stamen-watercolor"])
-                    fig_copy = go.Figure(fig)  # Create a new figure object with the same properties
+                    fig_copy = pio.copyfig(fig)  # Create a deep copy of the figure
                     
                     # Update map style
                     fig_copy.update_layout(mapbox_style=map_style)
