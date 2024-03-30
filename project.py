@@ -33,9 +33,6 @@ def is_valid_dataframe(df):
 # Main Streamlit app
 def main():
     st.title("Data Analysis App")
-    
-    import streamlit as st
-
     # Sidebar
     st.sidebar.title("User Guide")
 
