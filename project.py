@@ -287,20 +287,16 @@ def main():
                     
                     # Allow users to customize map style
                     map_style = st.selectbox("Select Map Style", ["open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner", "stamen-watercolor"])
-                    fig_copy = pio.copyfig(fig)  # Create a deep copy of the figure
-                    
-                    # Update map style
-                    fig_copy.update_layout(mapbox_style=map_style)
+                    fig.update_layout(mapbox_style=map_style)
                     
                     # Allow users to customize map appearance
                     zoom_level = st.slider("Zoom Level", min_value=1, max_value=15, value=10)
-                    fig_copy.update_layout(mapbox_zoom=zoom_level)
+                    fig.update_layout(mapbox_zoom=zoom_level)
                     
                     # Display the map plot
-                    st.plotly_chart(fig_copy)
+                    st.plotly_chart(fig)
                 else:
                     st.warning("Latitude and Longitude columns are required for Map Plot. Make sure your DataFrame has these columns.")
-
     # Sub-section B: Generate Correlation Matrix
     st.subheader("Sub-section B: Generate Correlation Matrix")
 
