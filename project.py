@@ -236,10 +236,15 @@ def main():
                     st.plotly_chart(fig)
 
             elif option == "Bar Graphs with Error Bars":
-                st.subheader("Bar Graphs with Error Bars:")
-                for column in selected_columns_visualization:
-                    fig = px.bar(df, x=df.index, y=column, error_y=df[column].std(), title=f'Bar Graph with Error Bars of {column}')
-                    st.plotly_chart(fig)
+                    st.subheader("Bar Graphs with Error Bars:")
+                    for column in selected_columns_visualization:
+                        fig, ax = plt.subplots()
+                        means = df.groupby(group_column)[column].mean()
+                        sems = df.groupby(group_column)[column].sem()
+                        means.plot(kind='bar', yerr=sems, ax=ax)
+                        ax.set_ylabel(column)
+                        ax.set_title(f'Bar Graph with Error Bars of {column}')
+                        st.pyplot(fig)
 
             elif option == "Line Plot":
                 st.subheader("Line Plot:")
