@@ -286,7 +286,9 @@ def main():
                     
                     # Allow users to customize map style
                     map_style = st.selectbox("Select Map Style", ["open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner", "stamen-watercolor"])
-                    fig_copy = fig.copy()  # Create a copy of the figure
+                    fig_copy = go.Figure(fig)  # Create a new figure object with the same properties
+                    
+                    # Update map style
                     fig_copy.update_layout(mapbox_style=map_style)
                     
                     # Allow users to customize map appearance
