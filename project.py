@@ -276,11 +276,21 @@ def main():
                 st.subheader("Map Plot:")
                 if "latitude" in df.columns and "longitude" in df.columns:
                     fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", hover_name=df.index, title="Map Plot")
-                    fig.update_layout(mapbox_style="open-street-map")
+                    
+                    # Allow users to customize map style
+                    map_style = st.selectbox("Select Map Style", ["open-street-map", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner", "stamen-watercolor"])
+                    fig.update_layout(mapbox_style=map_style)
+                    
+                    # Allow users to customize map appearance
+                    zoom_level = st.slider("Zoom Level", min_value=1, max_value=15, value=10)
+                    fig.update_layout(mapbox_zoom=zoom_level)
+                    
+                    # Display the map plot
                     st.plotly_chart(fig)
                 else:
                     st.warning("Latitude and Longitude columns are required for Map Plot. Make sure your DataFrame has these columns.")
 
+                
     # Sub-section B: Generate Correlation Matrix
     st.subheader("Sub-section B: Generate Correlation Matrix")
 
