@@ -112,9 +112,16 @@ def main():
         df[t_test_column2] = pd.to_numeric(df[t_test_column2], errors="coerce")
 
     # Perform t-test
+    
     if st.button("Perform t-test") and t_test_column1 is not None and t_test_column2 is not None:
         st.subheader("t-test Result:")
-        result_t_test = perform_t_test(df[t_test_column1].dropna(), df[t_test_column2].dropna())
+        
+        # Extract data for selected columns
+        column1_data = df[t_test_column1].dropna()
+        column2_data = df[t_test_column2].dropna()
+        
+        # Perform t-test
+        result_t_test = perform_t_test(column1_data, column2_data)
 
         # Display t-test result
         st.write(f"T-statistic: {result_t_test.statistic}")
@@ -290,7 +297,6 @@ def main():
                 else:
                     st.warning("Latitude and Longitude columns are required for Map Plot. Make sure your DataFrame has these columns.")
 
-                
     # Sub-section B: Generate Correlation Matrix
     st.subheader("Sub-section B: Generate Correlation Matrix")
 
