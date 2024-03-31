@@ -1,6 +1,3 @@
-Certainly! Adding a section to include a link to a specific dataset can provide users with a sample dataset to use for testing the application. Here's the updated readme file with the dataset section:
-
-```markdown
 # Data Analysis App 📊
 
 This Streamlit web application serves as a basic tool for generating overview information from uploaded CSV or Excel files. It provides users, including data analysts, researchers, and business professionals, with a simple interface to explore, analyze, and visualize datasets for preliminary insights.
@@ -35,23 +32,11 @@ To run this application locally, follow these steps:
 
 4. Upload your CSV or Excel file containing the data for analysis.
 
-## Sample Dataset 📂
-
-You can download a sample dataset [here](link_to_dataset). This dataset can be used to test the functionality of the Data Analysis App.
-
 ## Features 🛠️
 
 ### Section Zero: Upload and Encode Data
 
 Upload your CSV or Excel file and view the encoded data. The application automatically encodes categorical variables for analysis.
-
-### Section One: Data Analysis
-
-- **Summary Statistics:** View descriptive statistics of the uploaded dataset.
-- **Pivoting Data:** Enable pivoting and select columns for a pivoted view of the data.
-- **Box Plot:** Visualize the distribution of selected columns using box plots.
-
-... (continue with other sections)
 
 ## Requirements 📋
 
@@ -71,7 +56,4 @@ Contributions to enhance the functionality or fix any issues are welcome. Please
 
 ## License 📜
 
-This project is licensed under the [MIT License](LICENSE).
-```
-
-Now, users will have access to a sample dataset to test the functionality of the Data Analysis App. Replace `link_to_dataset` with the actual link to the dataset.
+This project is licensed under the [MIT License]
