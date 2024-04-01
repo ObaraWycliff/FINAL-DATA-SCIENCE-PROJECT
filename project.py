@@ -40,7 +40,7 @@ def main():
     st.sidebar.markdown("*This dataset is to be used in all sections except for map generation.*")
     # map dataset 
     st.sidebar.markdown("**Sample Dataset:** [Chipotle Locations Dataset](https://www.kaggle.com/datasets/jeffreybraun/chipotle-locations/download?datasetVersionNumber=3)")
-    st.sidebar.markdown("*This dataset is to be used in all sections except for map generation. Please use the CSV file.*")
+    st.sidebar.markdown("*This dataset is to be used for map generation. Please use the CSV file.*")
     # Data Encoding
     st.sidebar.markdown("### Data Encoding")
     st.sidebar.write("Data encoding is performed to convert categorical variables into numerical representations. This is necessary for machine learning algorithms that require numerical inputs.")
