@@ -35,11 +35,15 @@ def main():
     st.title("Data Analysis App")
     # Sidebar
     st.sidebar.title("User Guide")
-
+    # link to the sample dataset
+    st.sidebar.markdown("**Sample Dataset:** [Iris Dataset](https://www.kaggle.com/datasets/sakshisatre/iris-dataset/download?datasetVersionNumber=1)")
+    st.sidebar.markdown("*This dataset is to be used in all sections except for map generation.*")
+    # map dataset 
+    st.sidebar.markdown("**Sample Dataset:** [Chipotle Locations Dataset](https://www.kaggle.com/datasets/jeffreybraun/chipotle-locations/download?datasetVersionNumber=3)")
+    st.sidebar.markdown("*This dataset is to be used in all sections except for map generation. Please use the CSV file.*")
     # Data Encoding
     st.sidebar.markdown("### Data Encoding")
     st.sidebar.write("Data encoding is performed to convert categorical variables into numerical representations. This is necessary for machine learning algorithms that require numerical inputs.")
-
     # Summary Statistics
     st.sidebar.markdown("### Summary Statistics")
     st.sidebar.write("Summary statistics provide a concise overview of the dataset, including measures such as mean, median, standard deviation, etc. They help in understanding the central tendency and spread of the data.")
